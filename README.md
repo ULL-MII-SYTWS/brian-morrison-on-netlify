@@ -189,3 +189,214 @@ rama 'main' configurada para rastrear 'origin/main'.
 ![Netlify GitHub 2](docs/images/github-installing-2.png)
 
 ![Netlify GitHub 3](docs/images/github-installing-3.png)
+
+Now if you make some changes and push them to GitHub the changes will be deployed automatically.
+
+## Deployment using netlify-cli
+
+**Minutes**: 8:30
+
+### Installing netlify-cli
+
+ I have already a netlify-cli installed in my node version 16:
+
+ ```
+ ➜  netlify-demo git:(main) npm ls netlify-cli -g
+/Users/casianorodriguezleon/.nvm/versions/node/v16.0.0/lib
+└── netlify-cli@12.12.0
+```
+
+However in the video appears that Morrison installs  version `3.13.0`. I will continue with the version 12.
+
+```
+➜  netlify-demo git:(main) ✗ netlify
+
+⬥ Netlify CLI
+Read the docs: https://docs.netlify.com/cli/get-started/
+Support and bugs: https://github.com/netlify/cli/issues
+
+VERSION
+  netlify-cli/12.12.0 darwin-x64 node-v16.0.0
+
+USAGE
+  $ netlify [COMMAND]
+
+COMMANDS
+  $ addons       (Beta) Manage Netlify Add-ons
+  $ api          Run any Netlify API method
+  $ build        (Beta) Build on your local machine
+  $ completion   (Beta) Generate shell completion script
+  $ deploy       Create a new deploy from the contents of a folder
+  $ dev          Local dev server
+  $ env          Control environment variables for the current site
+  $ functions    Manage netlify functions
+  $ recipes      (Beta) Create and modify files in a project using
+                 pre-defined recipes
+  $ graph        (Beta) Control the Netlify Graph functions for the
+                 current site
+  $ init         Configure continuous deployment for a new or existing
+                 site. To create a new site without continuous deployment, use `netlify
+                 sites:create`
+  $ link         Link a local repo or project folder to an existing site
+                 on Netlify
+  $ lm           Handle Netlify Large Media operations
+  $ login        Login to your Netlify account
+  $ open         Open settings for the site linked to the current
+                 folder
+  $ serve        (Beta) Build the site for production and serve locally.
+                 This does not watch the code for changes, so if you need to rebuild your site then
+                 you must exit and run `serve` again.
+  $ sites        Handle various site operations
+  $ status       Print status information
+  $ switch       Switch your active Netlify account
+  $ unlink       Unlink a local folder from a Netlify site
+  $ watch        Watch for site deploy to finish
+```
+
+### Login to netlify
+
+Let us login:
+  
+```   
+➜  netlify-demo git:(main) ✗ netlify login
+Already logged in via netlify config on your machine
+
+Run netlify status for account details
+
+or run netlify switch to switch accounts
+
+To see all available commands run: netlify help
+
+
+   ╭─────────────────────────────────────────╮
+   │                                         │
+   │   Update available 12.12.0 → 12.13.1    │
+   │   Run npm i -g netlify-cli to update    │
+   │                                         │
+   ╰─────────────────────────────────────────╯
+```
+Following the advice we update the netlify-cli.
+
+### netlify link
+
+netlify link links a local folder to a site on Netlify. It creates a `.netlify` folder in the local folder with a `state.json` file that contains the site id. It also creates a `netlify.toml` file with the build settings.
+
+```
+➜  netlify-demo git:(main) ✗ netlify link --help
+Link a local repo or project folder to an existing site on Netlify
+
+USAGE
+  $ netlify link [options]
+
+OPTIONS
+  --git-remote-name <name>                     Name of Git remote to use. e.g. "origin"
+  -h, --help                                   display help for command
+  --id <id>                                    ID of site to link to
+  --debug                                      Print debugging information
+  --http-proxy [address]                       Proxy server address to route requests
+                                               through.
+  --http-proxy-certificate-filename [file]     Certificate file to use when connecting using a
+                                               proxy server
+  --name <name>                                Name of site to link to
+
+EXAMPLES
+  $ netlify link
+  $ netlify link --id 123-123-123-123
+  $ netlify link --name my-site-name
+```
+
+In netlify go to the **site overview > site settings > general** and copy the site id.
+
+![netlify-deploy-1](docs/images/netlify-deploy-1.png)
+
+The I run:
+
+```
+➜  netlify-demo git:(main) ✗ netlify link --id 2f49192d-4d4f-417c-8041-eba96f204298
+
+Adding local .netlify folder to .gitignore file...
+Linked to whimsical-croissant-184018
+```
+
+Make a change to the `App.vue` and rebuild the distribution:
+
+```
+➜  netlify-demo git:(main) ✗ npm run build
+```
+and now we can deploy it with `netlify deploy`:
+
+```
+➜  netlify-demo git:(main) ✗ netlify deploy --help
+Create a new deploy from the contents of a folder
+
+USAGE
+  $ netlify deploy [options]
+
+OPTIONS
+  --alias <name>                               Specifies the alias for deployment, the string
+                                               at the beginning of the deploy subdomain. Useful for
+                                               creating predictable deployment URLs. Avoid setting
+                                               an alias string to the same value as a deployed
+                                               branch. `alias` doesn’t create a branch deploy and
+                                               can’t be used in conjunction with the branch
+                                               subdomain feature. Maximum 37 characters.
+  -a, --auth <token>                           Netlify auth token to deploy with
+  -b, --branch <name>                          Serves the same functionality as --alias.
+                                               Deprecated and will be removed in future
+                                               versions
+  --build                                      Run build command before deploying
+  --context <context>                          Context to use when resolving build
+                                               configuration
+  -d, --dir <path>                             Specify a folder to deploy
+  -f, --functions <folder>                     Specify a functions folder to deploy
+  -h, --help                                   display help for command
+  --json                                       Output deployment data as JSON
+  -m, --message <message>                      A short message to include in the deploy
+                                               log
+  -o, --open                                   Open site after deploy (default: false)
+  -p, --prod                                   Deploy to production (default: false)
+  --prod-if-unlocked                           Deploy to production if unlocked, create a draft
+                                               otherwise (default: false)
+  -s, --site <name-or-id>                      A site name or ID to deploy to
+  --skip-functions-cache                       Ignore any functions created as part of a
+                                               previous `build` or `deploy` commands, forcing them
+                                               to be bundled again as part of the deployment
+                                               (default: false)
+  --timeout <number>                           Timeout to wait for deployment to finish
+  --debug                                      Print debugging information
+  --http-proxy [address]                       Proxy server address to route requests
+                                               through.
+  --http-proxy-certificate-filename [file]     Certificate file to use when connecting using a
+                                               proxy server
+  --trigger                                    Trigger a new build of your site on Netlify
+                                               without uploading local files
+
+EXAMPLES
+  $ netlify deploy
+  $ netlify deploy --site my-first-site
+  $ netlify deploy --prod
+  $ netlify deploy --prod --open
+  $ netlify deploy --prod-if-unlocked
+  $ netlify deploy --message "A message with an $ENV_VAR"
+  $ netlify deploy --auth $NETLIFY_AUTH_TOKEN
+  $ netlify deploy --trigger
+  $ netlify deploy --build --context deploy-preview
+```
+
+Let us run it:
+
+```
+➜  netlify-demo git:(main) ✗ netlify deploy --prod
+Deploy path: /Users/casianorodriguezleon/campus-virtual/2223/learning/netlify-learning/brain-morrison-videos/three-ways-to-deploy/netlify-demo/dist
+Deploying to main site URL...
+✔ Finished hashing 
+✔ CDN requesting 3 files
+✔ Finished uploading 3 assets
+✔ Deploy is live!
+
+Logs:              https://app.netlify.com/sites/whimsical-croissant-184018/deploys/63f1fe3039e9554f883f5a6f
+Unique Deploy URL: https://63f1fe3039e9554f883f5a6f--whimsical-croissant-184018.netlify.app
+Website URL:       https://whimsical-croissant-184018.netlify.app
+```
+
+![netlify-deploy-2](docs/images/netlify-deploy-2.png)
