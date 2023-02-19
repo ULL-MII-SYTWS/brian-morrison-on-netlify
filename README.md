@@ -1,3 +1,16 @@
+- [3 ways to deploy Web Apss to Netlify](#3-ways-to-deploy-web-apss-to-netlify)
+  - [Install. Use node v16!](#install-use-node-v16)
+  - ["vue create netlify-demo" and errors I committed during the installation](#vue-create-netlify-demo-and-errors-i-committed-during-the-installation)
+    - [Errors I committed during the installation](#errors-i-committed-during-the-installation)
+  - [Running in development mode](#running-in-development-mode)
+  - [npm run build](#npm-run-build)
+  - [Manually Deploying to Netlify](#manually-deploying-to-netlify)
+  - [Deployment through GitHub](#deployment-through-github)
+  - [Deployment using netlify-cli](#deployment-using-netlify-cli)
+    - [Installing netlify-cli](#installing-netlify-cli)
+    - [Login to netlify](#login-to-netlify)
+    - [netlify link](#netlify-link)
+
 # 3 ways to deploy Web Apss to Netlify
 
 Main reference: 
