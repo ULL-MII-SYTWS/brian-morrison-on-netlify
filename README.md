@@ -1,6 +1,9 @@
 # 3 ways to deploy Web Apss to Netlify
 
-Main reference: [3 ways to deploy Web Apss to Netlify](https://youtu.be/MEIMoz9pGRM) 2021
+Main reference: 
+* [3 ways to deploy Web Apss to Netlify](https://youtu.be/MEIMoz9pGRM) 2021
+* [Video List](https://www.youtube.com/playlist?list=PLwpjN-4DtVRZfN1GgXCkCNVC9V711zKfg)
+
 
 ## Install. Use node v16!
 
