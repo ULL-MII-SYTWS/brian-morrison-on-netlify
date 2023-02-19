@@ -122,3 +122,70 @@ and drag and drop the `dist` folder to the browser.
 
 **Minutes**: 4:05
 
+```
+➜  netlify-demo git init .
+Inicializado repositorio Git vacío en /Users/casianorodriguezleon/campus-virtual/2223/learning/netlify-learning/brain-morrison-videos/three-ways-to-deploy/netlify-demo/.git/
+➜  netlify-demo git:(main) ✗ git status
+En la rama main
+
+No hay commits todavía
+
+Archivos sin seguimiento:
+  (usa "git add <archivo>..." para incluirlo a lo que será confirmado)
+        .gitignore
+        .nvmrc
+        README.md
+        babel.config.js
+        docs/
+        package-lock.json
+        package.json
+        public/
+        src/
+
+no hay nada agregado al commit pero hay archivos sin seguimiento presentes (usa "git add" para hacerles seguimiento)
+➜  netlify-demo git:(main) ✗ git add .
+➜  netlify-demo git:(main) ✗ git ci -am 'reparing for deploy to netlify' 
+[main (commit-raíz) 213b6bc] reparing for deploy to netlify
+ 14 files changed, 28800 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 .nvmrc
+ create mode 100644 README.md
+ create mode 100644 babel.config.js
+ create mode 100644 docs/images/manually-installing-1.png
+ create mode 100644 docs/images/manually-installing-2.png
+ create mode 100644 package-lock.json
+ create mode 100644 package.json
+ create mode 100644 public/favicon.ico
+ create mode 100644 public/index.html
+ create mode 100644 src/App.vue
+ create mode 100644 src/assets/logo.png
+ create mode 100644 src/components/HelloWorld.vue
+ create mode 100644 src/main.js
+➜  netlify-demo git:(main) gh repo create
+? What would you like to do? Push an existing local repository to GitHub
+? Path to local repository .
+? Repository name ULL-MII-SYTWS/brian-morrison-on-netlify
+? Description https://youtu.be/MEIMoz9pGRM
+? Visibility Public
+✓ Created repository ULL-MII-SYTWS/brian-morrison-on-netlify on GitHub
+? Add a remote? Yes
+? What should the new remote be called? origin
+✓ Added remote git@github.com:ULL-MII-SYTWS/brian-morrison-on-netlify.git
+? Would you like to push commits from the current branch to "origin"? Yes
+Enumerando objetos: 22, listo.
+Contando objetos: 100% (22/22), listo.
+Compresión delta usando hasta 8 hilos
+Comprimiendo objetos: 100% (18/18), listo.
+Escribiendo objetos: 100% (22/22), 579.60 KiB | 4.17 MiB/s, listo.
+Total 22 (delta 0), reusados 0 (delta 0), pack-reusados 0
+To github.com:ULL-MII-SYTWS/brian-morrison-on-netlify.git
+ * [new branch]      HEAD -> main
+rama 'main' configurada para rastrear 'origin/main'.
+✓ Pushed commits to git@github.com:ULL-MII-SYTWS/brian-morrison-on-netlify.git
+```
+
+![Netlify GitHub 1](docs/images/github-installing-1.png)
+
+![Netlify GitHub 2](docs/images/github-installing-2.png)
+
+![Netlify GitHub 3](docs/images/github-installing-3.png)
